@@ -4,6 +4,12 @@ Release notes for Ubuntu, summarizing new features, bug fixes and backwards-inco
 
 Release notes contain specific upgrade instructions for that particular release. See also the general guidance on how to prepare for, and perform, an upgrade: [Ubuntu Desktop](https://documentation.ubuntu.com/desktop/en/latest/how-to/upgrade-ubuntu-desktop/) or [Ubuntu Server](https://ubuntu.com/server/docs/how-to/software/upgrade-your-release/).
 
+## 26.04 LTS
+
+* {ref}`ubuntu-26.04-lts-release-notes`
+* {ref}`resolute-raccoon-schedule`
+* [Ubuntu 26.04 LTS roadmap](https://discourse.ubuntu.com/t/ubuntu-26-04-lts-the-roadmap/72740)
+
 ## 25.10
 
 * {ref}`Questing Quokka release notes <ubuntu-25.10-release-notes>`
@@ -80,6 +86,7 @@ Your comments, bug reports, patches and suggestions help fix bugs and improve th
 :maxdepth: 2
 :caption: Supported releases
 
+26.04 LTS (Resolute Raccoon) <26.04/index>
 25.10 (Questing Quokka) <25.10/index>
 24.04 LTS (Noble Numbat) <24.04/index>
 22.04 LTS (Jammy Jellyfish) <22.04/index>
@@ -90,7 +97,7 @@ Your comments, bug reports, patches and suggestions help fix bugs and improve th
 :maxdepth: 2
 :caption: Currently in development
 
-26.04 LTS (Resolute Raccoon) <26.04/schedule>
+26.10 (S* S*) <26.10/schedule>
 :::
 
 :::{toctree}
