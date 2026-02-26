@@ -6,6 +6,13 @@
 
 These release notes cover new features and changes in Ubuntu 26.04 LTS (Resolute Raccoon).
 
+:::{toctree}
+:hidden:
+:maxdepth: 2
+
+Release schedule <schedule.md>
+:::
+
 Ubuntu 26.04 LTS is designated as a long-term support release. This means it will continue to receive security updates and critical bug fixes for five years. With an Ubuntu Pro subscription, access to ESM (Expanded Security Maintenance) updates will be available for ten years. 
 
 See our {ref}`release-policy-and-schedule`.
@@ -99,9 +106,3 @@ The GNOME desktop environment has been updated to version 50:
 …
 
 
-:::{toctree}
-:hidden:
-:maxdepth: 2
-
-Release schedule <schedule.md>
-:::
