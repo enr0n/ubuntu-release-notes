@@ -4,12 +4,41 @@ Release notes for Ubuntu, summarizing new features, bug fixes and backwards-inco
 
 Release notes contain specific upgrade instructions for that particular release. See also the general guidance on how to prepare for, and perform, an upgrade: [Ubuntu Desktop](https://documentation.ubuntu.com/desktop/en/latest/how-to/upgrade-ubuntu-desktop/) or [Ubuntu Server](https://ubuntu.com/server/docs/how-to/software/upgrade-your-release/).
 
+
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Supported releases
+
+26.04 LTS (Resolute Raccoon) <26.04/index>
+25.10 (Questing Quokka) <25.10/index>
+24.04 LTS (Noble Numbat) <24.04/index>
+22.04 LTS (Jammy Jellyfish) <22.04/index>
+:::
+
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Currently in development
+
+26.10 (S S) <26.10/index>
+:::
+
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Other releases
+
+Future releases <future>
+Older releases <archive>
+:::
+
 ## 26.04 LTS (Resolute Raccoon)
 
 * {ref}`ubuntu-26.04-lts-release-notes`
 * {ref}`resolute-raccoon-schedule`
 
-## 25.10
+## 25.10 (Questing Quokka)
 
 * {ref}`ubuntu-25.10-release-notes`
 
@@ -91,31 +120,3 @@ Your comments, bug reports, patches and suggestions help fix bugs and improve th
 
 * [Code of conduct](https://ubuntu.com/community/code-of-conduct)
 
-
-:::{toctree}
-:hidden:
-:maxdepth: 2
-:caption: Supported releases
-
-26.04 LTS (Resolute Raccoon) <26.04/index>
-25.10 (Questing Quokka) <25.10/index>
-24.04 LTS (Noble Numbat) <24.04/index>
-22.04 LTS (Jammy Jellyfish) <22.04/index>
-:::
-
-:::{toctree}
-:hidden:
-:maxdepth: 2
-:caption: Currently in development
-
-26.10 (S S) <26.10/index>
-:::
-
-:::{toctree}
-:hidden:
-:maxdepth: 2
-:caption: Other releases
-
-Future releases <future>
-Older releases <archive>
-:::
