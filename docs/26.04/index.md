@@ -31,8 +31,8 @@ You need either a USB port or a DVD drive for the installer media. An internet c
 
 ## Summary for LTS users
 
-If you’re upgrading **from Ubuntu 24.04 LTS to 26.04 LTS**, refer to {ref}`ubuntu-26.04-lts-summary-for-lts-users` to get an overview of the changes including all the interim releases.
+If you’re upgrading **from Ubuntu 24.04 LTS to 26.04 LTS**, refer to {ref}`ubuntu-26.04-lts-summary` to get an overview of the changes including all the interim releases.
 
 ## Changes for interim users
 
-If you're upgrading **from Ubuntu 25.10**, refer to {ref}`changes-in-ubuntu-26.04-lts-since-ubuntu-25.10`.
+If you're upgrading **from Ubuntu 25.10**, refer to {ref}`ubuntu-26.04-lts-changes-since-25.10`.

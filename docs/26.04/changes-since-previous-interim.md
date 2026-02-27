@@ -1,5 +1,5 @@
-(changes-in-ubuntu-26.04-lts-since-ubuntu-25.10)=
-# Changes in Ubuntu 26.04 LTS since Ubuntu 25.10
+(ubuntu-26.04-lts-changes-since-25.10)=
+# Ubuntu 26.04 LTS changes since 25.10
 
 If you're upgrading to Ubuntu 26.04 LTS from the previous interim release, Ubuntu 25.10 (Questing Quokka), the following changes apply to you.
 

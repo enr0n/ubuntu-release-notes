@@ -1,5 +1,5 @@
-(ubuntu-26.04-lts-summary-for-lts-users)=
-# Ubuntu 26.04 LTS summary for LTS users
+(ubuntu-26.04-lts-summary)=
+# Ubuntu 26.04 LTS summary
 
 If you’re upgrading to Ubuntu 26.04 LTS from Ubuntu 24.04 LTS (Noble Numbat), you receive the changes that happened in the six months since Ubuntu 25.10, as well as the changes in all the previous interim releases between 24.04 LTS and 26.04 LTS.
 
