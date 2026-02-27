@@ -37,7 +37,8 @@ E.g. Ubuntu 26.04 LTS
 ## Write a short title summarizing the change
 
 
-## Is there a ticket related to the change, e.g. in Jira, Launchpad, GitHub, etc.?
+## Is there a ticket related to the change?
 
+Add a link to Jira, Launchpad, GitHub, etc.
 
 ## Are there any upstream release notes related to the change?
