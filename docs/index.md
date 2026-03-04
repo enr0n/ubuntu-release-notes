@@ -7,11 +7,18 @@ Release notes contain specific upgrade instructions for that particular release.
 :::{toctree}
 :hidden:
 :maxdepth: 2
-:caption: Supported releases
+:caption: Supported LTS releases
 
-25.10 (Questing Quokka) <25.10/index>
 24.04 LTS (Noble Numbat) <24.04/index>
 22.04 LTS (Jammy Jellyfish) <22.04/index>
+:::
+
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Supported interim releases
+
+25.10 (Questing Quokka) <25.10/index>
 :::
 
 :::{toctree}
@@ -31,11 +38,9 @@ Future releases <future>
 Older releases <archive>
 :::
 
-## 25.10 (Questing Quokka)
+## LTS releases
 
-* {ref}`ubuntu-25.10-release-notes`
-
-## 24.04 LTS (Noble Numbat)
+### 24.04 LTS (Noble Numbat)
 
 * {ref}`changes-in-ubuntu-24.04.4`
 * {ref}`changes-in-ubuntu-24.04.3`
@@ -44,7 +49,7 @@ Older releases <archive>
 * {ref}`ubuntu-24.04-lts-release-notes`
 * {ref}`noble-numbat-schedule`
 
-## 22.04 LTS (Jammy Jellyfish)
+### 22.04 LTS (Jammy Jellyfish)
 
 * {ref}`changes-in-ubuntu-22.04.5`
 * {ref}`changes-in-ubuntu-22.04.4`
@@ -53,6 +58,12 @@ Older releases <archive>
 * {ref}`changes-in-ubuntu-22.04.1`
 * {ref}`ubuntu-22.04-lts-release-notes`
 * {ref}`jammy-jellyfish-schedule`
+
+## Interim releases
+
+### 25.10 (Questing Quokka)
+
+* {ref}`ubuntu-25.10-release-notes`
 
 (release-policy-and-schedule)=
 ## Release policy and schedule
