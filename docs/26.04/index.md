@@ -453,7 +453,7 @@ The Netplan network manager has been updated from version 1.0 to 1.2.
     :::{versionadded} 25.10
     :::
 
-:::{rubric} Package Management: APT 3.1
+:::{rubric} Package Management: APT 3
 :::
 
 APT has been updated from version 2.7 to 3.1.
