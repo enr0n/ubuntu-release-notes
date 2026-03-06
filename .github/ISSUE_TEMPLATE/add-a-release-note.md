@@ -25,6 +25,7 @@ E.g. Ubuntu 26.04 LTS
 - [ ] Desktop
 - [ ] Server
 - [ ] Development tools
+- [ ] Enterprise
 - [ ] Cloud
 - [ ] Security
 - [ ] Real-time Ubuntu
@@ -32,6 +33,9 @@ E.g. Ubuntu 26.04 LTS
 - [ ] All or most of the above
 
 ## Describe the change in detail
+
+
+## If it's a known issue, how can users work around it for now?
 
 
 ## Write a short title summarizing the change
