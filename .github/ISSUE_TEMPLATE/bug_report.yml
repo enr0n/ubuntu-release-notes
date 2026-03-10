@@ -5,6 +5,26 @@ labels:
 assignees:
   - msuchane
 body:
+- type: textarea
+  attributes:
+    label: Ubuntu release
+    description: |
+      Which Ubuntu release is affected by this change? E.g. Ubuntu 26.04 LTS.
+  validations:
+    required: true
+- type: dropdown
+  attributes:
+    label: Ubuntu release
+    description: Which Ubuntu release is affected by this change?
+    options:
+      - '25.10'
+      - '26.04 LTS'
+      - '26.10'
+      - '27.04'
+      - '27.10'
+      - Other (specify in the description)
+  validations:
+    required: true
 - type: checkboxes
   attributes:
     label: Is there an existing issue for this?
