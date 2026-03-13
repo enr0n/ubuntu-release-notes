@@ -190,6 +190,129 @@ Any consent that you previously granted to Ubuntu Report will not be carried ove
 
 ### Server
 
+Ubuntu Server users often come from using the former LTS -- in this case 24.04 Noble Numbat. We want to remind you to check out the release notes for the interim releases as well, because all the great things that happened in the meantime do apply for you as well.
+
+- {ref}`ubuntu-24.10-release-notes`
+- {ref}`ubuntu-25.04-release-notes`
+- {ref}`ubuntu-25.10-release-notes`
+
+#### OpenSSH
+
+* Deprecation warning for SHA1 SSHFP DNS records
+* Add a warning when the connection negotiates a non-post quantum key agreement algorithm.
+* Removes support for the weak DSA signature algorithm.
+* New `PerSourcePenalties` option that will penalise client addresses that for some reason do not complete authentication. New in version 9.8.
+* Support for a new hybrid post-quantum key exchange algorithm, called “mlkem768x25519-sha256”. Described in https://datatracker.ietf.org/doc/html/draft-kampanakis-curdle-ssh-pq-ke-03, it’s available by default. New in version 9.8.
+* New match option invalid-user, which can be used when the target username is not valid
+* New `sshd.service` alias to `ssh.service`. Both names can now be used in `systemctl` commands.
+* New binary packages called `openssh-client-gssapi` and `openssh-server-gssapi`. This is in preparation for a future split of the GSSAPI authentication mechanism into separate packages in the near future. For now, they just pull in their non-gssapi counterparts, if installed. See https://lists.debian.org/debian-devel/2024/04/msg00044.html for the detailed plan.
+* Host DSA keys are no longer generated.
+* Starting with 1:9.6p1-3ubuntu17, openssh server no longer reads `~/.pam_environment` of the target system upon login. See [LP: #2059859](https://bugs.launchpad.net/ubuntu/+source/openssh/+bug/2059859/) for details.
+
+For full upstream release notes for all releases, please consult https://www.openssh.org/releasenotes.html
+
+#### Dovecot
+
+Updated to 2.4.2. Version 2.4 introduced many changes to the Dovecot configuration format!
+
+Coming from Ubuntu 24.04, please follow [dovecot’s 2.3 upgrade documentation](https://doc.dovecot.org/2.4.2/installation/upgrade/2.3-to-2.4.html).
+
+When you’re coming from other versions, follow [the upgrade overview](https://doc.dovecot.org/2.4.2/installation/upgrade/overview.html).
+
+#### Postfix
+
+Specific release notes for major version releases since Ubuntu 24.04 LTS (Noble Numbat) are:
+
+* 3.9.0: https://www.postfix.org/announcements/postfix-3.9.0.html
+* 3.10.0: https://www.postfix.org/announcements/postfix-3.10.0.html
+
+A noteworthy change in the packaging of Postfix is that **by default it is no longer installed in a chroot, and only limited chroot support is available from now on**.
+
+#### Samba
+
+Samba has been updated to the new upstream 4.23 version. Changes since Ubuntu Noble 24.04:
+
+* SMB3 Unix Extensions enabled by default
+* NetBios is disabled by default in the configuration file /etc/samba/smb.conf for fresh installs
+* SMB3 Directory Leases
+* Netlogon Ping over LDAP and LDAPS
+* Experimental Himmelblaud Authentication in Samba
+* AD DC schema upgrade and provision performance improvements
+* LDAP TLS/SASL channel binding support
+* Group Managed Service Accounts
+* Samba can now claim Functional Level 2012R2 support
+* Some Samba public libraries made private by default
+* Samba AD will rotate expired passwords on smartcard-required accounts
+* Automatic keytab update after machine password change
+
+Removed features:
+
+* `nmbd proxy logon`
+* `cldap port`
+* `fruit:posix_rename`
+
+Packaging changes when upgrading from Ubuntu Noble 24.04:
+
+* samba-vfs-modules: the VFS modules from this package were moved to the samba package, with the exception of the Ceph module, which got its own package: samba-vfs-ceph. The samba-vfs-modules package is now just a transitional package, and it can be safely removed after the release upgrade.
+* samba-vfs-modules-extra: this package used to contain the GlusterFS VFS module. This module was moved to a new package called samba-vfs-glusterfs, and samba-vfs-modules-extra became a transitional package. It can also be safely removed after the release upgrade.
+* The dumpmscat binary is no longer built
+
+Samba upstream release notes since Ubuntu 24.04 LTS (Noble Numbat):
+
+- [https://www.samba.org/samba/history/samba-4.20.0.html](https://www.samba.org/samba/history/samba-4.20.0.html)
+- [https://www.samba.org/samba/history/samba-4.21.0.html](https://www.samba.org/samba/history/samba-4.21.0.html)
+- [https://www.samba.org/samba/history/samba-4.22.0.html](https://www.samba.org/samba/history/samba-4.22.0.html)
+- [https://www.samba.org/samba/history/samba-4.23.0.html](https://www.samba.org/samba/history/samba-4.23.0.html)
+
+##### Samba on i386
+
+Samba version 4.21.x added a dependency to the python3-samba package: python3-cryptography. Unfortunately, python3-cryptography was last built for i386 for Ubuntu Bionic 18.04, and is no longer available for that architecture, making this new dependency unsatisfiable.
+
+For Ubuntu Plucky 25.04 and later, the python3-samba package is no longer built for i386. Please see [LP: #2099895](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/2099895) for details. The main consequence is that the samba-tool script (part of that package) is no longer available for i386.
+
+##### Upgrading an AD/DC from previous Ubuntu releases
+
+If you have deployed a Samba Active Directory Domain Controller *without* having installed the `samba-ad-dc` package, you should install it before doing a release upgrade to Ubuntu 26.04 LTS (Resolute Raccoon). If `samba-ad-dc` is not installed prior to the release upgrade, the Active Directory Domain Controller functionality will not work on the upgraded system due to many missing components.
+
+See [LP: #2101838](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/2101838) for more information
+
+#### Squid
+
+Squid was updated to upstream version 7.2. Coming from version 6, the main new options are:
+
+* Add tls_key_log directive to log TLS master keys.
+
+* Add key-extras format to external ACL helpers to pass transaction details.
+
+* Add doh_query directive to send DNS queries over HTTPS.
+
+* Add cache_peer option tls-client-cert-switch to select client certificates dynamically.
+
+Several bugfixes for crash scenarios are also included in this major release.
+
+Some directives and options were removed/deprecated:
+
+* Removed client_delay_access directive.
+
+* Removed ftp_epsv directive.
+
+* Removed cache_peer option no-netdb-exchange.
+
+* Removed client_persistent_connections and server_persistent_connections directives.
+
+For a list of all changes and fixes, please check the [upstream releases page](https://github.com/squid-cache/squid/releases).
+
+#### SSSD
+
+SSSD now runs under user `sssd` (instead of `root`). Make sure that `sssd` can still access secrets or integrations from its new user.
+
+The implicit files provider and domain was removed: see <https://sssd.io/docs/files-provider-deprecation.html>.
+
+Other changes of importance are listed upstream:
+
+* https://sssd.io/release-notes/sssd-2.11.0.html
+* https://sssd.io/release-notes/sssd-2.12.0.html
+
 ### Development
 
 * GCC 🐄 has been updated from version 14 to 15.2, `binutils` from 2.42 to 2.45, and `glibc` from 2.39 to 2.42.

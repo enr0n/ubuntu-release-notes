@@ -17,9 +17,29 @@ The GNOME desktop environment has been updated to version 50.
 
 ### Server features
 
-#### cloud-init v. 25.1.1
+#### Apache2
 
-...
+Apache 2 has been upgraded to upstream version 2.4.65. This new release includes a security fix:
+
+* [CVE-2025-54090](https://www.cve.org/CVERecord?id=CVE-2025-54090): Apache HTTP Server: ‘RewriteCond expr’ always evaluates to true in 2.4.64
+
+For more details, see the [upsteam release notes](https://www.apachelounge.com/Changelog-2.4.html) and the list of [security fixes](https://httpd.apache.org/security/vulnerabilities_24.html).
+
+The debian changes for the new version have also disabled TLS 1.0 and 1.1, following RFC 8996. These should be already disabled by default in OpenSSL, and now Apache2 follows the same. See [the fixed bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943415).
+
+#### Django
+
+Django was updated to LTS version 5.2.9, and will include security fixes for further point releases. For more information, see the [Django 5.2 release notes](https://docs.djangoproject.com/en/6.0/releases/5.2/).
+
+#### Chrony 4.8
+
+Chrony was updated to version 4.8, which adds support for limiting the selection of unreachable sources, fixes `refclock` handling on newer kernels and more.
+
+For more information about the 4.8 release or all the other changes since version 4.5 that was in Noble please have a look at [Chrony’s news page](https://chrony-project.org/news.html).
+
+#### Exim4
+
+The Exim4 update to 4.99.1 improves handling many messages to a single host by using fewer forks & execs. New options like dkim_verify_minimal avoid calling the DKIM ACL after the first good verify and fix various bugs. For a detailed list of changes please refer to the [upstream changelog](https://github.com/Exim/exim/blob/master/doc/doc-txt/ChangeLog#L84). The minor .1 in 4.99.1 ensures that recent re-occurring security issues of CVE-2025-26794 and CVE-2025-67896 are closed right away.
 
 #### Kerberos
 
@@ -29,11 +49,268 @@ Kerberos has been configured to observe the `/etc/krb5.conf.d/` directory by def
 * If you already include `/etc/krb5.conf.d/` in your `krb5.conf` file, either active or commented out, no changes will be made.
 * If your existing `krb5.conf` file is a symbolic link, no changes will be made.
 
-MIT Kerberos and Heimdal are both supported, but use different orderings for the include directive. MIT Kerberos uses alphanumerical order, while Heimdal uses the unpredictable order of the readdir() system call ([LP: #2140967](https://bugs.launchpad.net/ubuntu/+source/heimdal/+bug/2140967)).
+MIT Kerberos and Heimdal are both supported, but use different orderings for the include directive. MIT Kerberos uses alphanumerical order, while Heimdal uses the unpredictable order of the readdir() system call ([LP: #2140967](https://bugs.launchpad.net/ubuntu/+source/heimdal/+bug/2140967))
+
+#### `multipath-tools` 0.12.2
+
+Updated to version 0.12.2. See the [upstream changelog](https://github.com/opensvc/multipath-tools/releases/tag/0.12.2).
+
+#### Nginx 1.28.2
+
+Nginx was updated to version 1.28.2, which includes fixes for various bugs, including CVE-2026-1642 and CVE-2025-53859.
+
+See the [2.8 series upstream release notes](https://nginx.org/en/CHANGES-1.28).
+
+#### OpenLDAP
+
+New version [2.6.10](https://launchpad.net/ubuntu/+source/openldap).
+
+* Running in [AppArmor enforce mode](https://documentation.ubuntu.com/server/how-to/security/apparmor/) now.
+* Added patch to support changing pbkdf2 iteration count (see task [#2125685](https://bugs.launchpad.net/ubuntu/+source/openldap/+bug/2125685))
+
+See the [2.6 series upstream release notes](https://git.openldap.org/openldap/openldap/-/blob/OPENLDAP_REL_ENG_2_6/CHANGES).
+
+#### PHP 8.5.2
+
+PHP was updated to the 8.5.2 upstream version. Among other enhancements and bugfixes, the highlighted changes are:
+
+* A new URI Extension
+* The Pipe Operator
+* Clone With functionality
+* The `#[\NoDiscard]` Attribute
+* Closures and First-Class Callables in Constant Expressions
+* Persistent `cURL` Share Handles
+* `array_first()` and `array_last()` functions
+
+Other breaking changes and new features can be seen in the [full upstream changelog](https://www.php.net/ChangeLog-8.php#PHP_8_5).
+
+#### Samba 4.23
+
+Samba has been updated to the new upstream 4.23 version.
+
+New features and important changes in 4.23:
+
+* SMB3 Unix Extensions enabled by default
+* NetBios is disabled by default in the configuration file /etc/samba/smb.conf for fresh installs
+
+### SoS (`sosreport`)
+
+SoS was updated to 4.10.2. This upgrade introduces new plugins and also adds new features to existing plugins.
+
+For more information see the [4.10.1](https://github.com/sosreport/sos/releases/tag/4.10.1) and [4.10.2](https://github.com/sosreport/sos/releases/tag/4.10.2) upstream release notes.
+
+### Container features
+
+#### Container stacks
+
+For the `containerd` and `runc` packages, we established a pattern to either keep the regular updates to the latest version or to opt for slower, more stable updates throughout the time the release is active. For more please read [Ubuntu Server Gazette - Issue 8 - Containers: Steady paths for agile stacks](https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-8-containers-steady-paths-for-agile-stacks/68680).
+
+#### `containerd` 2.2.1
+
+The `containerd` packages (`src:containerd-app`, `src:containerd-stable`) were updated to version 2.2.1. Version 2 includes the stabilization of new features added in the last 1.x release as well as the removal of features which were deprecated in 1.x, meaning you should expect breaking changes here.
+
+For further details on such changes, please refer to the `containerd` 2.0 [upstream release notes](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) and check the notes for [individual point releases](https://github.com/containerd/containerd/releases).
+
+#### `runc` 1.4.0
+
+The `runc` package (`src:runc-app`) was updated to version 1.4.0. The most noteworthy change here is that the handling of `pids.limit` has been updated to match the newer guidance from the OCI runtime specification. In particular, now a maximum limit value of 0 will be treated as an actual limit (it will be treated the same as a limit value of 1). We only expect users that explicitly set `pids.limit` to 0 will see a behavior change.
+
+For more details on this new release, please [check the upstream release notes](https://github.com/opencontainers/runc/releases/tag/v1.4.0).
+
+#### Docker 29
+
+[docker.io](http://docker.io) was updated to version 29. This release includes several improvements and breaking changes.
+
+There is a new experimental support for `nftables` which can be enabled by setting Docker daemon’s firewall-backend option to `nftables`.
+
+The `containerd` image store is now the default for **fresh installs**. This doesn’t apply to daemons configured with `userns-remap` or for users upgrading from a previous [docker.io](http://docker.io) version.
+
+For a comprehensive list of changes, please check the [upstream release notes](https://docs.docker.com/engine/release-notes/29/).
+
+### Virtualization features
+
+#### libvirt
+
+The libvirt package was upgraded to version 12.0.0. Here is the important changes since Ubuntu Questing:
+
+* Several new features have been added into the bhyve driver:
+
+* experimental NAT networking support using the Packet Filter (pf) firewall.
+
+* querying domain block, interface, and memory statistics. not all statistics fields are supported though.
+
+* SLIRP networking support
+
+* NVMe device support
+
+* virtio-scsi support
+
+* initial ARM64 support
+
+* Multi-GPU: Add support for NUMA affinity of PCI devices
+
+To support NVIDIA Multi-Instance GPU (MIG) configurations, libvirt now handles QEMU’s acpi-generic-initiator device internally. MIG enables partitioning a physical GPU into multiple isolated instances, each associated with one or more virtual NUMA nodes.
+
+* Hyper-V:
+
+  * Introduce Hyper-V host-model mode
+
+* Hyper-V virttype support for Qemu domains
+
+For more details, please see the [upstream changelog](https://libvirt.org/news.html#v12-0-0-2026-01-15)
+
+Some additional notable changes:
+
+* The detection of the CPU MSR (Model Specific Register) features has been improved by enabling he msr kernel module load and fixing vmx-\* features detection issue.
+
+* Use sysusers to manage users and groups
+
+#### QEMU
+
+The QEMU package was upgraded to version 10.2.1. Here is the important changes since Ubuntu Questing:
+
+Upgrading Windows 11 makes the VM stop working and to fix this issue and ensure the migration path, we added new machine types for Resolute and old Ubuntu releases:
+
+* pc-i440fx-questing-v2 Ubuntu 25.10 PC v2 (i440FX + PIIX, + 10.1 machine, 1996)
+
+* pc-i440fx-noble-v2   Ubuntu 24.04 PC v2 (i440FX + PIIX, arch-caps fix, 1996)
+
+* pc-q35-noble-v2      Ubuntu 24.04 PC v2 (Q35 + ICH9, arch-caps fix, 2009)
+
+Other notable new features:
+
+* ARM
+
+  * new board model: amd-versal2-virt
+
+  * New CPU architectural features emulated: FEAT_TCR2, FEAT_CSSC, FEAT_SCTLR2 …
+
+* RISC-V
+
+  * Add riscv64 to FirmwareArchitecture
+
+  * Update OpenSBI to v1.7
+
+  * Implement MonitorDef HMP API
+
+* X86
+
+  * Support for a new accelerator, MSHV, which lets you create VMs from a Hyper-V guest without using nested virtualization.
+
+* Migration:
+
+  * Supported new cpr-exec migration mode
+
+  * Supported mapped-ram on snapshot save/load
+
+For more details, please see related upstream [changelog](https://wiki.qemu.org/ChangeLog/10.2) and the general log on [removed features](https://qemu-project.gitlab.io/qemu/about/removed-features.html)
+
+#### EDK2
+
+The package has been updated to version **2025.11**. Below are the most significant changes since **Ubuntu Questing**:
+
+* **OVMF packaging rework**
+
+  * OVMF has been split into the following packages:
+
+    * `ovmf-generic`
+
+    * `ovmf-amdsev`
+
+    * `ovmf-inteltdx`
+
+  * The `ovmf` package is now a **metapackage** that depends on the above variants.
+    This allows users to install only the OVMF firmware compatible with their CPU.
+
+* **`ovmf-inteltdx` changes**
+
+  * `OVMF.inteltdx.fd` has been removed.
+
+  * `OVMF.inteltdx.secboot.fd` has been renamed to `OVMF.inteltdx.ms.fd`.
+
+* **Removed components**
+
+  * `qemu-efi-arm`
+
+  * `ovmf-ia32`
+
+  * The `loongarch64` target is no longer built.
+
+* **Secure Boot improvements**
+
+  * NX is now enabled in all Secure Boot variants.
+
+  * The `strictnx` variant has been dropped.
+
+* **New package**
+
+  * Introduced `ovmf-legacy`, providing `OVMF.legacy.fd` with PVSCSI support.
+
+Further details on new features and bug fixes are available in the upstream changelogs:
+
+* [edk2-stable202505](https://github.com/tianocore/edk2/releases/tag/edk2-stable202505)
+
+* [edk2-stable202508](https://github.com/tianocore/edk2/releases/tag/edk2-stable202508)
+
+* [edk2-stable202511](https://github.com/tianocore/edk2/releases/tag/edk2-stable202511)
+
+### Database features
+
+#### DocumentDB
+
+DocumentDB is now available in Ubuntu for the release of 26.04, starting with version 0.108-0. It is a powerful, scalable, MongoDB compatible open-source document database built for modern applications, built on PostgreSQL. For more information see [documentdb.io](https://documentdb.io/).
+
+#### MySQL and MariaDB
+
+MySQL’s current LTS version 8.4 is provided in Ubuntu 26.04, starting with version 8.4.8. Future security fixes will be provided by 8.4.x version updates. For more information [see the upstream release notes](https://dev.mysql.com/doc/relnotes/mysql/8.4/en/).
+
+MariaDB was updated to the latest LTS version 11.8.6. Starting with 26.04, the package will now be provided with [full support in Ubuntu main](https://bugs.launchpad.net/ubuntu/+source/mariadb/+bug/2122095). For more information on the MariaDB LTS, [see the upstream release notes](https://mariadb.com/docs/release-notes/community-server/11.8).
+
+The MySQL and MariaDB servers are mutually exclusive on Ubuntu for now.
+
+#### MySQL Shell
+
+MySQL Shell was updated to the latest LTS version, 8.4.8, to match MySQL’s version. See the [upstream release notes](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/) for more information.
+
+#### Percona Toolkit
+
+Percona Toolkit was updated to the latest version, 3.7.1, and now includes additional tools for managing your MySQL, MariaDB, or PostgreSQL server. This includes `pt-galera-log-explainer`, `pt-k8s-debug-collector`,  and `pt-pg-summary` among others.
+
+#### PostgreSQL
+
+PostgreSQL was updated to version 18. This new version improves performance for workloads of all sizes through a new I/O subsystem that has demonstrated up to 3× performance improvements when reading from storage, and also increases the number of queries that can use indexes. This release makes major-version upgrades less disruptive, accelerating upgrade times and reducing the time required to reach expected performance after an upgrade completes. Developers also benefit from PostgreSQL 18 features, including virtual generated columns that compute values at query time, and the database-friendly uuidv7() function that provides better indexing and read performance for UUIDs. PostgreSQL 18 makes it easier to integrate with single-sign on (SSO) systems with support for OAuth 2.0 authentication.
+
+For further information, check the [upstream release announcement](https://www.postgresql.org/about/news/postgresql-18-released-3142/) and the [upstream release notes](https://www.postgresql.org/docs/18/release-18.html).
+
+Note that Postgresql-18 in Ubuntu 26.04 LTS no longer builds for the i386 architecture. Therefore, it no longer produces the libpq-dev and libpq5 binary packages for that architecture. This means that any package depending on those libraries, will also not be available in i386. See [LP: #2142320](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2142320) for more information.
+
+#### Valkey
+
+Valkey was updated to version 9.0, starting with 9.0.3. This includes various features and improvements beyond 8.x, such as atomic slot migrations and hash field expiration. For more information on the new version, see the [Valkey 9 blog post](https://valkey.io/blog/introducing-valkey-9/). Release notes are available on the [Valkey project GitHub](https://github.com/valkey-io/valkey/releases).
+
+### High availability and clustering features
+
+#### `fence-agents`
+
+fence-agents is updated to version 4.17.0. This version includes a few new agents, like aws_vpc_net and hetzner_cloud, and enhancements to the existing ones. Security-wise, the azure_arm agent replaced the dependency on msrestazure (deprecated) to azure-identity.
+
+For a list of all changes, please refer to the \[upstream changes\]( https://github.com/ClusterLabs/fence-agents/compare/v4.16.0...v4.17.0 )
+
+#### `resource-agents`
+
+resource-agents is updated to version 4.17.0. This version includes several new agents, like aws-datasync-\* and tickle-\*, and enhancements to the existing ones. oracledb and zabbixagent were replaced by the oracle and zabbix-agent, respectively, and may require adjustments to existing configuration.
+
+For a list of all changes, please refer to the \[upstream release notes\]( https://github.com/ClusterLabs/resource-agents/blob/main/ChangeLog )
+
+#### HAProxy
+
+Haproxy was updated to the latest upstream LTS release, 3.2, which introduces performance and efficiency improvements, faster and more reliable QUIC protocol support, and more. For further details on this new release, please check the HAProxy 3.2 [upstream announcement](https://www.mail-archive.com/haproxy@formilux.org/msg45917.html).
+
+For users coming from HAPRoxy 2, **breaking changes** include detection of accidental multiple commands sent to the Runtime API, rejecting the enabled keyword for dynamic servers, stricter parsing of non-standard URIs and renaming of tune.ssl.ocsp-update to tune.ocsp-update. You can learn more about it at[ https://www.haproxy.com/blog/announcing-haproxy-3-0](https://www.haproxy.com/blog/announcing-haproxy-3-0). A complete list of changes is avalilable at[ https://www.haproxy.org/download/3.2/src/CHANGELOG](https://www.haproxy.org/download/3.0/src/CHANGELOG).
 
 ### Development features
 
-#### Toolchain Upgrades 🛠️
+#### Toolchain upgrades 🛠️
 
 * glibc 2.42 now ships non-utf8 encodings as `libc-gconv-modules-extra`.
 * LLVM 21 is the default LLVM toolchain.
@@ -50,6 +327,19 @@ OpenJDK 25 is the default Java toolchain.
 ### Enterprise features
 
 ### Cloud features
+
+#### cloud-init v. 26.1
+
+Cloud-init features introduced beyond v. 25.3 in Questing:
+
+* Add support for s390x platform detection on LXD
+* Add support for Tilaa cloud platform detection.
+* Fix lxd snap installs on plucky and newer
+* Scaleway cloud to support exposing regions and availability zones, drop private IP handling
+* Add network v1 support for bonds, bridges and VLANs
+* Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack network_data.json support of bond names
+
+See [cloud-init’s release notes for more details](https://github.com/canonical/cloud-init/releases).
 
 ### Security features
 
@@ -91,20 +381,31 @@ If the previous behavior is preferred, password feedback can be disabled using t
 
 ### Server changes
 
-#### SSSD
+#### NFS
 
-Now running under user `sssd` (instead of `root`)!
+The `blkmapd` and `nfs-blkmap` services have been removed. From the `NEWS` file:
 
-* Please make sure that sssd can still access secrets or integrations from its new user
+> pNFS block layout is deprecated in favor of pNFS SCSI layout. This is  because block layout could easily result in data loss, as documented in <https://linux-nfs.org/wiki/index.php/PNFS_block_server_setup>.
+>
+> Users of pNFS are advised to move to the revised SCSI/NVMe layouts  that are safe to use and don't require the use of blkmapd.
 
-Updated to version 2.12.
+#### SSSD 2.12
 
-* The implicit files provider and domain was removed: https://sssd.io/docs/files-provider-deprecation.html
+SSSD has been updated to version 2.12.
 
-Other changes of importance are listed upstream:
+SSSD now runs under user `sssd` (instead of `root`). Make sure that `sssd` can still access secrets or integrations from its new user.
 
-* https://sssd.io/release-notes/sssd-2.11.0.html
-* https://sssd.io/release-notes/sssd-2.12.0.html
+The implicit files provider and domain was removed: see <https://sssd.io/docs/files-provider-deprecation.html>.
+
+#### PHP
+
+* It is no longer possible to use `array` and `callable` as class alias names in `class_alias()`.
+
+Other breaking changes and new features can be seen in the [full upstream changelog](https://www.php.net/ChangeLog-8.php#PHP_8_5).
+
+#### HAProxy
+
+For users coming from HAProxy 2, **breaking changes** include detection of accidental multiple commands sent to the Runtime API, rejecting the enabled keyword for dynamic servers, stricter parsing of non-standard URIs and renaming of tune.ssl.ocsp-update to tune.ocsp-update. You can learn more about it at [https://www.haproxy.com/blog/announcing-haproxy-3-0](https://www.haproxy.com/blog/announcing-haproxy-3-0). A complete list of changes is available at [https://www.haproxy.org/download/3.2/src/CHANGELOG](https://www.haproxy.org/download/3.0/src/CHANGELOG).
 
 ### Development changes
 
@@ -125,6 +426,14 @@ Other changes of importance are listed upstream:
 
 ### Server deprecations
 
+#### PHP
+
+* Deprecation of the backtick operator
+* Non-canonical cast names (boolean), (integer), (double), and (binary) have been deprecated. (bool), (int), (float), and (string) need to be used instead.
+* Using null as an array offset or when calling array_key_exists() is now deprecated - now an empty string is needed.
+
+Other breaking changes and new features can be seen in the [full upstream changelog](https://www.php.net/ChangeLog-8.php#PHP_8_5).
+
 ### Development deprecations
 
 ### Enterprise deprecations
@@ -143,6 +452,22 @@ Other changes of importance are listed upstream:
 ### Desktop fixes
 
 ### Server fixes
+
+#### OpenSSH 10.2
+
+OpenSSH was updated to version 10.2, which is a bugfix release on top of 10.1 present in the Ubuntu Questing 25.10 release.
+
+#### Dovecot 2.4.2
+
+Updated to 2.4.2. See the [upstream announcement](https://dovecot.org/mailman3/archives/list/dovecot@dovecot.org/thread/XTMMPVQ3QKQMYDZ3CZZCXPNHN7OXKS3L/).
+
+#### Postfix 3.10.6
+
+Postfix was updated to version 3.10.6. See the [upstream announcement](https://www.postfix.org/announcements/postfix-3.10.6.html).
+
+#### `unbound` 1.24.2
+
+Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetLabs/unbound/releases/tag/release-1.24.2).
 
 ### Development fixes
 
@@ -213,18 +538,20 @@ Installing `ubuntu-fonts-classic` results in a non-Ubuntu font being displayed (
 
 #### rabbitmq-server
 
-Certain version hops may be unsupported due to feature flags, raising questions about how Ubuntu will maintain this package moving forward. We are currently exploring the use of snaps as a potential solution to enable smoother upgrades. For more information please read <https://bugs.launchpad.net/bugs/2074309>.
+RabbitMQ is not directly upgradable due to feature flags. To mitigate this, some manual steps are needed. For more information please read <https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-12-upgrading-rabbitmq-across-ubuntu-releases/77271>.
 
 #### Bacula
 
 Moved from our `main` repository to `universe`. All relevant Ubuntu changes are upstream now, so we directly sync this from Debian.
 
+<!--
 #### Openstack
 
 Currently, Nova Compute is non-functional because of a python3.13 incompatiblity ([LP:#2103413](https://bugs.launchpad.net/ubuntu/+source/nova/+bug/2103413)).
 The Openstack team and Upstream work on it and it will be resolved via an SRU later.
 
 The Ubuntu Cloud Archive is not affected by this bug.
+-->
 
 #### Installer
 
@@ -250,9 +577,11 @@ By default, the `smbd` service from samba is not confined. To be affected by thi
 
 Therefore, only users who have taken those steps and upgrade to Noble, will be affected by this bug. An SRU to fix it will be done shortly after release.
 
+<!--
 #### Docker
 
 There is an AppArmor related bug where containers cannot be promptly stopped due to the recently added AppArmor profile for `runc`. The containers are always killed with `SIGKILL` due to the denials when trying to receive a signal. More details about this bug can be found [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099), and a workaround is described [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099/comments/4).
+-->
 
 ### Development issues
 
@@ -294,9 +623,11 @@ Some particular hardware (e.g. Thinkpad x201) might have issues ([general freeze
 
 6. Finally, run `sudo update-grub` to make the change take effect.
 
+<!--
 #### PPC64EL
 
 PMDK sees some hardware-specific failures in its test suite, which may make the software partially or fully inoperable on the ppc64el architecture. ([LP: #2061913](https://bugs.launchpad.net/ubuntu/+source/pmdk/+bug/2061913/))
+-->
 
 #### Raspberry Pi
 
