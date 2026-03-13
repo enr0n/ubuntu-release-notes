@@ -93,7 +93,7 @@ New features and important changes in 4.23:
 * SMB3 Unix Extensions enabled by default
 * NetBios is disabled by default in the configuration file /etc/samba/smb.conf for fresh installs
 
-### SoS (`sosreport`)
+#### SoS (`sosreport`)
 
 SoS was updated to 4.10.2. This upgrade introduces new plugins and also adds new features to existing plugins.
 
@@ -340,6 +340,31 @@ Cloud-init features introduced beyond v. 25.3 in Questing:
 * Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack network_data.json support of bond names
 
 See [cloud-init’s release notes for more details](https://github.com/canonical/cloud-init/releases).
+
+#### Microsoft Azure
+
+The `walinuxagent` package was updated to version `2.15.0.1`. This release brings several improvements to the Microsoft Azure Linux Guest Agent since Ubuntu Questing:
+
+Extension Security
+: Introduced support for extension signature validation and policy enforcement to improve the security of VM extensions.
+
+Memory Management
+: Implemented memory quota management using cgroups to ensure the agent maintains a predictable resource footprint.
+
+Enhanced Reliability
+: Improved telemetry and retry strategies for extension artifact downloads, along with more robust log collection handling.
+
+Documentation
+: Added a new `waagent` manpage for better local access to command-line documentation.
+
+To overcome the former issues around password-changing functionality it will now utilize sha512_crypt of python3-passlib to be compatibly with python 3.13 that removed crypt.
+
+For further details on the changes in this update, please refer to the upstream release notes:
+
+* [v2.12.0.2](https://github.com/Azure/WALinuxAgent/releases/tag/v2.12.0.2)
+* [v2.13.1.1](https://github.com/Azure/WALinuxAgent/releases/tag/v2.13.1.1)
+* [v2.14.0.1](https://github.com/Azure/WALinuxAgent/releases/tag/v2.14.0.1)
+* [v2.15.0.1](https://github.com/Azure/WALinuxAgent/releases/tag/v2.15.0.1)
 
 ### Security features
 
@@ -661,7 +686,7 @@ There is a bug ([LP: #2104316](https://bugs.launchpad.net/ubuntu-power-systems/+
 
 #### cloud-init upgrade
 
-It has been reported that cloud-init may fail to upgrade properly in the Oracular to Pluck upgrade path, see [LP: #2104316](https://bugs.launchpad.net/ubuntu-power-systems/+bug/2104297).
+It has been reported that cloud-init may fail to upgrade properly in the Oracular to Plucky upgrade path, see [LP: #2104316](https://bugs.launchpad.net/ubuntu-power-systems/+bug/2104297).
 
 #### ZFS with cryptoswap
 
