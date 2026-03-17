@@ -17,20 +17,6 @@ The GNOME desktop environment has been updated to version 50.
 
 ### Server features
 
-#### Apache2
-
-Apache 2 has been upgraded to upstream version 2.4.65. This new release includes a security fix:
-
-* [CVE-2025-54090](https://www.cve.org/CVERecord?id=CVE-2025-54090): Apache HTTP Server: ‘RewriteCond expr’ always evaluates to true in 2.4.64
-
-For more details, see the [upsteam release notes](https://www.apachelounge.com/Changelog-2.4.html) and the list of [security fixes](https://httpd.apache.org/security/vulnerabilities_24.html).
-
-The debian changes for the new version have also disabled TLS 1.0 and 1.1, following RFC 8996. These should be already disabled by default in OpenSSL, and now Apache2 follows the same. See [the fixed bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943415).
-
-#### Django
-
-Django was updated to LTS version 5.2.9, and will include security fixes for further point releases. For more information, see the [Django 5.2 release notes](https://docs.djangoproject.com/en/6.0/releases/5.2/).
-
 #### Chrony 4.8
 
 Chrony was updated to version 4.8, which adds support for limiting the selection of unreachable sources, fixes `refclock` handling on newer kernels and more.
@@ -39,7 +25,9 @@ For more information about the 4.8 release or all the other changes since versio
 
 #### Exim4
 
-The Exim4 update to 4.99.1 improves handling many messages to a single host by using fewer forks & execs. New options like dkim_verify_minimal avoid calling the DKIM ACL after the first good verify and fix various bugs. For a detailed list of changes please refer to the [upstream changelog](https://github.com/Exim/exim/blob/master/doc/doc-txt/ChangeLog#L84). The minor .1 in 4.99.1 ensures that recent re-occurring security issues of CVE-2025-26794 and CVE-2025-67896 are closed right away.
+The Exim4 update to 4.99.1 improves handling many messages to a single host by using fewer forks & execs. New options like `dkim_verify_minimal` avoid calling the DKIM ACL after the first good verify and fix various bugs.
+
+For a detailed list of changes please refer to the [upstream changelog](https://github.com/Exim/exim/blob/master/doc/doc-txt/ChangeLog#L84). The minor .1 in 4.99.1 ensures that recent re-occurring security issues of CVE-2025-26794 and CVE-2025-67896 are closed right away.
 
 #### Kerberos
 
@@ -49,24 +37,18 @@ Kerberos has been configured to observe the `/etc/krb5.conf.d/` directory by def
 * If you already include `/etc/krb5.conf.d/` in your `krb5.conf` file, either active or commented out, no changes will be made.
 * If your existing `krb5.conf` file is a symbolic link, no changes will be made.
 
-MIT Kerberos and Heimdal are both supported, but use different orderings for the include directive. MIT Kerberos uses alphanumerical order, while Heimdal uses the unpredictable order of the readdir() system call ([LP: #2140967](https://bugs.launchpad.net/ubuntu/+source/heimdal/+bug/2140967))
+MIT Kerberos and Heimdal are both supported, but use different orderings for the include directive. MIT Kerberos uses alphanumerical order, while Heimdal uses the unpredictable order of the `readdir()` system call ([LP: #2140967](https://bugs.launchpad.net/ubuntu/+source/heimdal/+bug/2140967))
 
 #### `multipath-tools` 0.12.2
 
-Updated to version 0.12.2. See the [upstream changelog](https://github.com/opensvc/multipath-tools/releases/tag/0.12.2).
-
-#### Nginx 1.28.2
-
-Nginx was updated to version 1.28.2, which includes fixes for various bugs, including CVE-2026-1642 and CVE-2025-53859.
-
-See the [2.8 series upstream release notes](https://nginx.org/en/CHANGES-1.28).
+Updated from version 0.11.1 to 0.12.2. See the 0.12 series in the [upstream changelog](https://github.com/opensvc/multipath-tools/blob/0.12.2/NEWS.md).
 
 #### OpenLDAP
 
 New version [2.6.10](https://launchpad.net/ubuntu/+source/openldap).
 
 * Running in [AppArmor enforce mode](https://documentation.ubuntu.com/server/how-to/security/apparmor/) now.
-* Added patch to support changing pbkdf2 iteration count (see task [#2125685](https://bugs.launchpad.net/ubuntu/+source/openldap/+bug/2125685))
+* Added patch to support changing `pbkdf2` iteration count (see task [#2125685](https://bugs.launchpad.net/ubuntu/+source/openldap/+bug/2125685))
 
 See the [2.6 series upstream release notes](https://git.openldap.org/openldap/openldap/-/blob/OPENLDAP_REL_ENG_2_6/CHANGES).
 
@@ -91,7 +73,7 @@ Samba has been updated to the new upstream 4.23 version.
 New features and important changes in 4.23:
 
 * SMB3 Unix Extensions enabled by default
-* NetBios is disabled by default in the configuration file /etc/samba/smb.conf for fresh installs
+* NetBios is disabled by default in the configuration file `/etc/samba/smb.conf` for fresh installs
 
 #### SoS (`sosreport`)
 
@@ -133,37 +115,37 @@ For a comprehensive list of changes, please check the [upstream release notes](h
 
 The libvirt package was upgraded to version 12.0.0. Here is the important changes since Ubuntu Questing:
 
-* Several new features have been added into the bhyve driver:
+* Several new features have been added into the `bhyve` driver:
 
-* experimental NAT networking support using the Packet Filter (pf) firewall.
+* Experimental NAT networking support using the Packet Filter (`pf`) firewall.
 
-* querying domain block, interface, and memory statistics. not all statistics fields are supported though.
+* Querying domain block, interface, and memory statistics. Not all statistics fields are supported though.
 
 * SLIRP networking support
 
 * NVMe device support
 
-* virtio-scsi support
+* `virtio-scsi` support
 
-* initial ARM64 support
+* Initial ARM64 support
 
 * Multi-GPU: Add support for NUMA affinity of PCI devices
 
-To support NVIDIA Multi-Instance GPU (MIG) configurations, libvirt now handles QEMU’s acpi-generic-initiator device internally. MIG enables partitioning a physical GPU into multiple isolated instances, each associated with one or more virtual NUMA nodes.
+To support NVIDIA Multi-Instance GPU (MIG) configurations, `libvirt` now handles QEMU’s `acpi-generic-initiator` device internally. MIG enables partitioning a physical GPU into multiple isolated instances, each associated with one or more virtual NUMA nodes.
 
 * Hyper-V:
 
   * Introduce Hyper-V host-model mode
 
-* Hyper-V virttype support for Qemu domains
+* Hyper-V `virttype` support for Qemu domains
 
 For more details, please see the [upstream changelog](https://libvirt.org/news.html#v12-0-0-2026-01-15)
 
 Some additional notable changes:
 
-* The detection of the CPU MSR (Model Specific Register) features has been improved by enabling he msr kernel module load and fixing vmx-\* features detection issue.
+* The detection of the CPU MSR (Model Specific Register) features has been improved by enabling the `msr` kernel module load and fixing `vmx-*` features detection issue.
 
-* Use sysusers to manage users and groups
+* Use `sysusers` to manage users and groups
 
 #### QEMU
 
@@ -171,23 +153,23 @@ The QEMU package was upgraded to version 10.2.1. Here is the important changes s
 
 Upgrading Windows 11 makes the VM stop working and to fix this issue and ensure the migration path, we added new machine types for Resolute and old Ubuntu releases:
 
-* pc-i440fx-questing-v2 Ubuntu 25.10 PC v2 (i440FX + PIIX, + 10.1 machine, 1996)
+* `pc-i440fx-questing-v2` Ubuntu 25.10 PC v2 (i440FX + PIIX, + 10.1 machine, 1996)
 
-* pc-i440fx-noble-v2   Ubuntu 24.04 PC v2 (i440FX + PIIX, arch-caps fix, 1996)
+* `pc-i440fx-noble-v2`   Ubuntu 24.04 PC v2 (i440FX + PIIX, `arch-caps` fix, 1996)
 
-* pc-q35-noble-v2      Ubuntu 24.04 PC v2 (Q35 + ICH9, arch-caps fix, 2009)
+* `pc-q35-noble-v2`      Ubuntu 24.04 PC v2 (Q35 + ICH9, `arch-caps` fix, 2009)
 
 Other notable new features:
 
 * ARM
 
-  * new board model: amd-versal2-virt
+  * New board model: `amd-versal2-virt`
 
-  * New CPU architectural features emulated: FEAT_TCR2, FEAT_CSSC, FEAT_SCTLR2 …
+  * New CPU architectural features emulated: `FEAT_TCR2`, `FEAT_CSSC`, `FEAT_SCTLR2`.
 
 * RISC-V
 
-  * Add riscv64 to FirmwareArchitecture
+  * Add `riscv64` to `FirmwareArchitecture`
 
   * Update OpenSBI to v1.7
 
@@ -199,19 +181,19 @@ Other notable new features:
 
 * Migration:
 
-  * Supported new cpr-exec migration mode
+  * Supported new `cpr-exec` migration mode
 
-  * Supported mapped-ram on snapshot save/load
+  * Supported `mapped-ram` on snapshot save/load
 
 For more details, please see related upstream [changelog](https://wiki.qemu.org/ChangeLog/10.2) and the general log on [removed features](https://qemu-project.gitlab.io/qemu/about/removed-features.html)
 
 #### EDK2
 
-The package has been updated to version **2025.11**. Below are the most significant changes since **Ubuntu Questing**:
+The package has been updated to version **2025.11**. Below are the most significant changes since Ubuntu Questing:
 
-* **OVMF packaging rework**
+OVMF packaging rework
 
-  * OVMF has been split into the following packages:
+: * OVMF has been split into the following packages:
 
     * `ovmf-generic`
 
@@ -222,29 +204,29 @@ The package has been updated to version **2025.11**. Below are the most signific
   * The `ovmf` package is now a **metapackage** that depends on the above variants.
     This allows users to install only the OVMF firmware compatible with their CPU.
 
-* **`ovmf-inteltdx` changes**
+`ovmf-inteltdx` changes
 
-  * `OVMF.inteltdx.fd` has been removed.
+: * `OVMF.inteltdx.fd` has been removed.
 
   * `OVMF.inteltdx.secboot.fd` has been renamed to `OVMF.inteltdx.ms.fd`.
 
-* **Removed components**
+Removed components
 
-  * `qemu-efi-arm`
+: * `qemu-efi-arm`
 
   * `ovmf-ia32`
 
   * The `loongarch64` target is no longer built.
 
-* **Secure Boot improvements**
+Secure Boot improvements
 
-  * NX is now enabled in all Secure Boot variants.
+: * NX is now enabled in all Secure Boot variants.
 
   * The `strictnx` variant has been dropped.
 
-* **New package**
+New package
 
-  * Introduced `ovmf-legacy`, providing `OVMF.legacy.fd` with PVSCSI support.
+: * Introduced `ovmf-legacy`, providing `OVMF.legacy.fd` with PVSCSI support.
 
 Further details on new features and bug fixes are available in the upstream changelogs:
 
@@ -258,19 +240,15 @@ Further details on new features and bug fixes are available in the upstream chan
 
 #### DocumentDB
 
-DocumentDB is now available in Ubuntu for the release of 26.04, starting with version 0.108-0. It is a powerful, scalable, MongoDB compatible open-source document database built for modern applications, built on PostgreSQL. For more information see [documentdb.io](https://documentdb.io/).
+DocumentDB is now available in Ubuntu, starting with version 0.108-0. It is a powerful, scalable, MongoDB compatible open-source document database built for modern applications, built on PostgreSQL. For more information see [documentdb.io](https://documentdb.io/).
 
-#### MySQL and MariaDB
+#### MariaDB is fully supported
 
-MySQL’s current LTS version 8.4 is provided in Ubuntu 26.04, starting with version 8.4.8. Future security fixes will be provided by 8.4.x version updates. For more information [see the upstream release notes](https://dev.mysql.com/doc/relnotes/mysql/8.4/en/).
+Starting with 26.04, MariaDB will now be provided with [full support in Ubuntu main](https://bugs.launchpad.net/ubuntu/+source/mariadb/+bug/2122095).
 
-MariaDB was updated to the latest LTS version 11.8.6. Starting with 26.04, the package will now be provided with [full support in Ubuntu main](https://bugs.launchpad.net/ubuntu/+source/mariadb/+bug/2122095). For more information on the MariaDB LTS, [see the upstream release notes](https://mariadb.com/docs/release-notes/community-server/11.8).
+MariaDB was updated to the latest LTS version 11.8.6. For more information on the MariaDB LTS, [see the upstream release notes](https://mariadb.com/docs/release-notes/community-server/11.8).
 
 The MySQL and MariaDB servers are mutually exclusive on Ubuntu for now.
-
-#### MySQL Shell
-
-MySQL Shell was updated to the latest LTS version, 8.4.8, to match MySQL’s version. See the [upstream release notes](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/) for more information.
 
 #### Percona Toolkit
 
@@ -278,41 +256,41 @@ Percona Toolkit was updated to the latest version, 3.7.1, and now includes addit
 
 #### PostgreSQL
 
-PostgreSQL was updated to version 18. This new version improves performance for workloads of all sizes through a new I/O subsystem that has demonstrated up to 3× performance improvements when reading from storage, and also increases the number of queries that can use indexes. This release makes major-version upgrades less disruptive, accelerating upgrade times and reducing the time required to reach expected performance after an upgrade completes. Developers also benefit from PostgreSQL 18 features, including virtual generated columns that compute values at query time, and the database-friendly uuidv7() function that provides better indexing and read performance for UUIDs. PostgreSQL 18 makes it easier to integrate with single-sign on (SSO) systems with support for OAuth 2.0 authentication.
+PostgreSQL was updated to version 18. This new version improves performance for workloads of all sizes through a new I/O subsystem that has demonstrated up to 3× performance improvements when reading from storage, and also increases the number of queries that can use indexes. This release makes major-version upgrades less disruptive, accelerating upgrade times and reducing the time required to reach expected performance after an upgrade completes. Developers also benefit from PostgreSQL 18 features, including virtual generated columns that compute values at query time, and the database-friendly `uuidv7()` function that provides better indexing and read performance for UUIDs. PostgreSQL 18 makes it easier to integrate with single-sign on (SSO) systems with support for OAuth 2.0 authentication.
 
 For further information, check the [upstream release announcement](https://www.postgresql.org/about/news/postgresql-18-released-3142/) and the [upstream release notes](https://www.postgresql.org/docs/18/release-18.html).
 
-Note that Postgresql-18 in Ubuntu 26.04 LTS no longer builds for the i386 architecture. Therefore, it no longer produces the libpq-dev and libpq5 binary packages for that architecture. This means that any package depending on those libraries, will also not be available in i386. See [LP: #2142320](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2142320) for more information.
-
 #### Valkey
 
-Valkey was updated to version 9.0, starting with 9.0.3. This includes various features and improvements beyond 8.x, such as atomic slot migrations and hash field expiration. For more information on the new version, see the [Valkey 9 blog post](https://valkey.io/blog/introducing-valkey-9/). Release notes are available on the [Valkey project GitHub](https://github.com/valkey-io/valkey/releases).
+Valkey was updated to version 9.0, starting with 9.0.3. This includes various features and improvements beyond 8.x, such as atomic slot migrations and hash field expiration.
+
+For more information on the new version, see the [Valkey 9 blog post](https://valkey.io/blog/introducing-valkey-9/). Release notes are available on the [Valkey project GitHub](https://github.com/valkey-io/valkey/releases).
 
 ### High availability and clustering features
 
 #### `fence-agents`
 
-fence-agents is updated to version 4.17.0. This version includes a few new agents, like aws_vpc_net and hetzner_cloud, and enhancements to the existing ones. Security-wise, the azure_arm agent replaced the dependency on msrestazure (deprecated) to azure-identity.
+`fence-agents` is updated to version 4.17.0. This version includes a few new agents, like `aws_vpc_net` and `hetzner_cloud`, and enhancements to the existing ones.
 
-For a list of all changes, please refer to the \[upstream changes\]( https://github.com/ClusterLabs/fence-agents/compare/v4.16.0...v4.17.0 )
+In terms of security, the `azure_arm` agent replaced the dependency on `msrestazure` (deprecated) to `azure-identity`.
+
+For a list of all changes, please refer to the [upstream changes](https://github.com/ClusterLabs/fence-agents/compare/v4.16.0...v4.17.0).
 
 #### `resource-agents`
 
-resource-agents is updated to version 4.17.0. This version includes several new agents, like aws-datasync-\* and tickle-\*, and enhancements to the existing ones. oracledb and zabbixagent were replaced by the oracle and zabbix-agent, respectively, and may require adjustments to existing configuration.
+`resource-agents` is updated to version 4.17.0. This version includes several new agents, like `aws-datasync-*` and `tickle-*`, and enhancements to the existing ones.
 
-For a list of all changes, please refer to the \[upstream release notes\]( https://github.com/ClusterLabs/resource-agents/blob/main/ChangeLog )
+For a list of all changes, please refer to the [upstream release notes](https://github.com/ClusterLabs/resource-agents/blob/main/ChangeLog).
 
 #### HAProxy
 
-Haproxy was updated to the latest upstream LTS release, 3.2, which introduces performance and efficiency improvements, faster and more reliable QUIC protocol support, and more. For further details on this new release, please check the HAProxy 3.2 [upstream announcement](https://www.mail-archive.com/haproxy@formilux.org/msg45917.html).
-
-For users coming from HAPRoxy 2, **breaking changes** include detection of accidental multiple commands sent to the Runtime API, rejecting the enabled keyword for dynamic servers, stricter parsing of non-standard URIs and renaming of tune.ssl.ocsp-update to tune.ocsp-update. You can learn more about it at[ https://www.haproxy.com/blog/announcing-haproxy-3-0](https://www.haproxy.com/blog/announcing-haproxy-3-0). A complete list of changes is avalilable at[ https://www.haproxy.org/download/3.2/src/CHANGELOG](https://www.haproxy.org/download/3.0/src/CHANGELOG).
+HAProxy was updated to the latest upstream LTS release, 3.2, which introduces performance and efficiency improvements, faster and more reliable QUIC protocol support, and more. For further details on this new release, please check the HAProxy 3.2 [upstream announcement](https://www.mail-archive.com/haproxy@formilux.org/msg45917.html).
 
 ### Development features
 
 #### Toolchain upgrades 🛠️
 
-* glibc 2.42 now ships non-utf8 encodings as `libc-gconv-modules-extra`.
+* `glibc` 2.42 now ships non-UTF8 encodings as `libc-gconv-modules-extra`.
 * LLVM 21 is the default LLVM toolchain.
 * Rust 1.93.1 is the default Rust toolchain.
 
@@ -334,10 +312,10 @@ Cloud-init features introduced beyond v. 25.3 in Questing:
 
 * Add support for s390x platform detection on LXD
 * Add support for Tilaa cloud platform detection.
-* Fix lxd snap installs on plucky and newer
+* Fix LXD Snap installs on Plucky and newer
 * Scaleway cloud to support exposing regions and availability zones, drop private IP handling
 * Add network v1 support for bonds, bridges and VLANs
-* Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack network_data.json support of bond names
+* Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack `network_data.json` support of bond names
 
 See [cloud-init’s release notes for more details](https://github.com/canonical/cloud-init/releases).
 
@@ -368,7 +346,13 @@ For further details on the changes in this update, please refer to the upstream 
 
 ### Security features
 
+#### TPM/FDE
+
+...
+
 ### Hardware support features
+
+...
 
 ### Common features
 
@@ -384,11 +368,11 @@ For further details on the changes in this update, please refer to the upstream 
 
 ...
 
-#### fwupd
+#### `fwupd`
 
 Systems running TPM/FDE will now prompt for the recovery key before firmware updates that may require the recovery key upon reboot.
 
-#### sudo-rs
+#### `sudo-rs`
 
 Password feedback is now enabled by default in order to improve the user experience of `sudo`.
 If the previous behavior is preferred, password feedback can be disabled using the following steps:
@@ -404,7 +388,13 @@ If the previous behavior is preferred, password feedback can be disabled using t
 
 ### Desktop changes
 
+...
+
 ### Server changes
+
+#### TLS 1.0 and 1.1 disabled in Apache
+
+The Debian changes for the new version of Apache have disabled TLS 1.0 and 1.1, following RFC 8996. These should be already disabled by default in OpenSSL, and now Apache follows the same. See [the fixed bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943415).
 
 #### NFS
 
@@ -428,10 +418,21 @@ The implicit files provider and domain was removed: see <https://sssd.io/docs/fi
 
 Other breaking changes and new features can be seen in the [full upstream changelog](https://www.php.net/ChangeLog-8.php#PHP_8_5).
 
-#### HAProxy
+### Database changes
 
-For users coming from HAProxy 2, **breaking changes** include detection of accidental multiple commands sent to the Runtime API, rejecting the enabled keyword for dynamic servers, stricter parsing of non-standard URIs and renaming of tune.ssl.ocsp-update to tune.ocsp-update. You can learn more about it at [https://www.haproxy.com/blog/announcing-haproxy-3-0](https://www.haproxy.com/blog/announcing-haproxy-3-0). A complete list of changes is available at [https://www.haproxy.org/download/3.2/src/CHANGELOG](https://www.haproxy.org/download/3.0/src/CHANGELOG).
+#### PostgreSQL is no longer available on i386
 
+PostgreSQL 18 in Ubuntu 26.04 LTS no longer builds for the i386 architecture. Therefore, it no longer produces the `libpq-dev` and `libpq5` binary packages for that architecture. This means that any package depending on those libraries will also not be available in i386.
+
+See [LP: #2142320](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2142320) for more information.
+
+### High availability and clustering changes
+
+#### Replaced agents in `resource-agents`
+
+The `oracledb` and `zabbixagent` agents were replaced by the `oracle` and `zabbix-agent`, respectively. You might need to adjust your existing configuration.
+
+<!--
 ### Development changes
 
 ### Enterprise changes
@@ -443,11 +444,13 @@ For users coming from HAProxy 2, **breaking changes** include detection of accid
 ### Hardware support changes
 
 ### Common changes
-
+-->
 
 ## Deprecated features
 
 ### Desktop deprecations
+
+...
 
 ### Server deprecations
 
@@ -459,6 +462,7 @@ For users coming from HAProxy 2, **breaking changes** include detection of accid
 
 Other breaking changes and new features can be seen in the [full upstream changelog](https://www.php.net/ChangeLog-8.php#PHP_8_5).
 
+<!--
 ### Development deprecations
 
 ### Enterprise deprecations
@@ -470,13 +474,27 @@ Other breaking changes and new features can be seen in the [full upstream change
 ### Hardware support deprecations
 
 ### Common deprecations
-
+-->
 
 ## Bug fixes
 
 ### Desktop fixes
 
+...
+
 ### Server fixes
+
+#### Apache 2.4.65
+
+Apache has been updated to upstream version 2.4.65. For more details, see the [upsteam release notes](https://www.apachelounge.com/Changelog-2.4.html).
+
+#### Nginx 1.28.2
+
+Nginx was updated to version 1.28.2, which includes fixes for various bugs. See the [1.28 series upstream release notes](https://nginx.org/en/CHANGES-1.28).
+
+#### Django 5.2.9
+
+Django was updated to LTS version 5.2.9. For more information, see the [Django 5.2 release notes](https://docs.djangoproject.com/en/6.0/releases/5.2/).
 
 #### OpenSSH 10.2
 
@@ -494,6 +512,15 @@ Postfix was updated to version 3.10.6. See the [upstream announcement](https://w
 
 Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetLabs/unbound/releases/tag/release-1.24.2).
 
+### Database fixes
+
+#### MySQL 8.4.8
+
+MySQL’s current LTS version 8.4 is provided in Ubuntu 26.04, starting with version 8.4.8. Future security fixes will be provided by 8.4.x version updates. For more information [see the upstream release notes](https://dev.mysql.com/doc/relnotes/mysql/8.4/en/).
+
+MySQL Shell was updated to the latest LTS version, 8.4.8, to match MySQL’s version. See the [upstream release notes](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/) for more information.
+
+<!--
 ### Development fixes
 
 ### Enterprise fixes
@@ -502,19 +529,10 @@ Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetL
 
 ### Security fixes
 
-#### Apache2
-
-Apache 2 has been upgraded to upstream version 2.4.65. This new release includes a security fix:
-
-* [CVE-2025-54090](https://www.cve.org/CVERecord?id=CVE-2025-54090): Apache HTTP Server: ‘RewriteCond expr’ always evaluates to true in 2.4.64
-
-For more details, see the [upstream release notes](https://www.apachelounge.com/Changelog-2.4.html) and the list of [security fixes](https://httpd.apache.org/security/vulnerabilities_24.html).
-
-The Debian changes for the new version have also disabled TLS 1.0 and 1.1, following RFC 8996. These should be already disabled by default in OpenSSL, and now Apache2 follows the same. See [the fixed bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943415).
-
 ### Hardware support fixes
 
 ### Common fixes
+-->
 
 
 ## Known issues
@@ -610,17 +628,21 @@ Therefore, only users who have taken those steps and upgrade to Noble, will be a
 There is an AppArmor related bug where containers cannot be promptly stopped due to the recently added AppArmor profile for `runc`. The containers are always killed with `SIGKILL` due to the denials when trying to receive a signal. More details about this bug can be found [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099), and a workaround is described [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099/comments/4).
 -->
 
+<!--
 ### Development issues
 
 ### Enterprise issues
+-->
 
 ### Cloud issues
 
 #### Microsoft Azure
 
-The current version of walinuxagent relies on python3-legacycrypt for password changing functionality but it cannot be made a dependency due to a component mismatch ([LP: #2106484](https://launchpad.net/bugs/2106484)).
+The current version of `walinuxagent` relies on `python3-legacycrypt` for password changing functionality but it cannot be made a dependency due to a component mismatch ([LP: #2106484](https://launchpad.net/bugs/2106484)).
 
+<!--
 ### Security issues
+-->
 
 ### Hardware support issues
 
@@ -680,7 +702,7 @@ PMDK sees some hardware-specific failures in its test suite, which may make the 
 
 #### TPM/FDE
 
-TPM/FDE installs seem to fail to boot after the installation is complete ([LP: #2104316](https://bugs.launchpad.net/snap-pc/+bug/2104316)). This is an issue with the *beta* image, and it is projected to be fixed by the plucky release.
+TPM/FDE installs seem to fail to boot after the installation is complete ([LP: #2104316](https://bugs.launchpad.net/snap-pc/+bug/2104316)). This is an issue with the *beta* image, and it is projected to be fixed by the Plucky release.
 
 #### Netboot installs
 

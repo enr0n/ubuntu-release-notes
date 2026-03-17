@@ -313,6 +313,14 @@ Other changes of importance are listed upstream:
 * https://sssd.io/release-notes/sssd-2.11.0.html
 * https://sssd.io/release-notes/sssd-2.12.0.html
 
+### High availability and clustering
+
+#### Breaking changes in HAProxy
+
+For users coming from HAPRoxy 2, breaking changes include detection of accidental multiple commands sent to the Runtime API, rejecting the enabled keyword for dynamic servers, stricter parsing of non-standard URIs and renaming of `tune.ssl.ocsp-update` to `tune.ocsp-update`.
+
+You can learn more at [Announcing HAProxy 3.0](https://www.haproxy.com/blog/announcing-haproxy-3-0). A complete list of changes is available in the [upstream changelog](https://www.haproxy.org/download/3.0/src/CHANGELOG).
+
 ### Development
 
 * GCC 🐄 has been updated from version 14 to 15.2, `binutils` from 2.42 to 2.45, and `glibc` from 2.39 to 2.42.
