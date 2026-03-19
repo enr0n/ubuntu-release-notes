@@ -39,10 +39,15 @@ body:
     options:
       - label: Desktop
       - label: Server
+      - label: Containers
+      - label: Virtualization
+      - label: Databases
+      - label: High availability and clustering
       - label: Development tools
       - label: Enterprise
       - label: Cloud
       - label: Security
+      - label: WSL
       - label: Real-time Ubuntu
       - label: Hardware support
       - label: A common, underlying change
