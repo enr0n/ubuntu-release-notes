@@ -271,9 +271,11 @@ See the [HAProxy 3.3](https://www.haproxy.com/blog/announcing-haproxy-3-3) and [
 
 ### System changes
 
+
+(support-for-legacy-system-v-scripts-removed)=
 #### Support for legacy System V scripts removed
 
-As announced in previous release notes, the component `systemd-sysv-generator` for creating systemd services from `/etc/init.d` scripts at runtime has been removed. Packages in the Ubuntu archive that were previously relying on this component either now ship a systemd service, or have been removed if they were no longer maintained.
+As announced in previous {ref}`release notes <ubuntu-26.04-lts-release-notes>`, the component `systemd-sysv-generator` for creating systemd services from `/etc/init.d` scripts at runtime has been removed. Packages in the Ubuntu Archive that were previously relying on this component either now ship a systemd service, or have been removed if they were no longer maintained.
 
 
 ## Deprecated features
